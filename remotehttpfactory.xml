@@ -1,0 +1,69 @@
+<RemoteHttpFactory>
+	<Proxys>
+		<Proxy type="dynamic" name="alpha">
+			<connection ip="78.23.244.145" port="80" />
+			<connection ip="88.157.149.250" port="8080" />
+			<connection ip="141.85.220.108" port="8080" />
+			<connection ip="180.183.143.183" port="8080" />
+			<connection ip="183.88.92.97" port="8080" />
+			<connection ip="43.241.209.231" port="8118" />
+		</Proxy>
+		<Proxy type="aidaili" name="beta">
+		    <api>http://dev.kuaidaili.com/api/getproxy/</api>
+		    <params>
+		        <param>orderid=967312748080936</param>
+		        <param>num=20</param>
+		        <param>b_pcchrome=1</param>
+		        <param>b_pcie=1</param>
+		        <param>b_pcff=1</param>
+		        <param>protocol=1</param>
+		        <param>method=2</param>
+		        <param>an_an=1</param>
+		        <param>an_ha=1</param>
+		        <param>sep=1</param>
+			</params>
+		</Proxy>    
+	</Proxys>
+	<headers>
+		<headermap name="sina">
+			<header name="User-Agent" value="Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1671.3 Safari/537.36" />
+			<header name="Host" value="hq.sinajs.cn" />
+			<header name="Accept" value="text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" />
+			<header name="Accept-Language" value="zh-CN,zh;q=0.8,en;q=0.6" />
+			<header name="Cache-Control" value="no-cache" />
+			<header name="Connection" value="keep-alive" />
+			<header name="Pragma" value="no-cache" />
+		</headermap>
+		<headermap name="jisilu">
+			<header name="User-Agent" value="Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1671.3 Safari/537.36" />
+			<header name="Host" value="www.jisilu.cn" />
+			<header name="Accept" value="text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" />
+			<header name="Accept-Language" value="zh-CN,zh;q=0.8,en;q=0.6" />
+			<header name="Cache-Control" value="no-cache" />
+			<header name="Connection" value="keep-alive" />
+			<header name="Pragma" value="no-cache" />
+		</headermap>
+	</headers>
+	<loggers>
+		<logger name="normallogger">
+			<class>david.tang.proxyhttpaccess.logger.DefaultLogger</class>
+		</logger>
+	</loggers>
+	<controllers>
+		<controller name="test">
+			<logger name="normallogger" />
+			<rules>
+				<rule>
+					<domain>hq.sinajs.cn</domain>
+					<proxy>beta</proxy>
+					<header>sina</header>
+					<limit>10</limit>
+				</rule>
+				<rule>
+					<domain>www.jisilu.cn</domain>
+					<header>jisilu</header>
+				</rule>
+			</rules>
+		</controller>
+	</controllers>
+</RemoteHttpFactory>
